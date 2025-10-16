@@ -59,6 +59,17 @@ DEFAULT_PROVIDERS_CONFIG: AppConfig = {
         'api_key': '',
         'max_tokens': 8192,
     },
+    'gemini': {
+        'models': {
+            'gemini-2.0-flash-exp': {'type': 'text'},
+            'gemini-1.5-pro': {'type': 'text'},
+            'gemini-1.5-flash': {'type': 'text'},
+            'gemini-2.5-flash-image': {'type': 'image'},
+        },
+        'url': 'https://generativelanguage.googleapis.com/v1beta/',
+        'api_key': '',
+        'max_tokens': 8192,
+    },
 
 }
 
