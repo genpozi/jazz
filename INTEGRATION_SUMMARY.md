@@ -149,11 +149,18 @@ Once the server is restarted:
 4. **Generation**: Images are generated using Google AI Studio API
 5. **Watermark**: All images include SynthID watermark
 
-## 📚 Additional Resources
+## 📚 Documentation
 
-- **Detailed Documentation**: See `GEMINI_IMAGE_INTEGRATION.md`
+### Quick Access
+- **Quick Start**: [`GEMINI_QUICK_START.md`](GEMINI_QUICK_START.md) - 5-minute setup guide
+- **User Guide**: [`USER_GUIDE_GEMINI_IMAGE.md`](USER_GUIDE_GEMINI_IMAGE.md) - Complete user documentation
+- **Technical Details**: [`GEMINI_IMAGE_INTEGRATION.md`](GEMINI_IMAGE_INTEGRATION.md) - Developer documentation
+- **Feature Overview**: [`docs/GEMINI_IMAGE_FEATURE.md`](docs/GEMINI_IMAGE_FEATURE.md) - Feature summary
+
+### External Resources
 - **API Reference**: https://ai.google.dev/gemini-api/docs/image-generation
 - **Model Page**: https://aistudio.google.com/models/gemini-2-5-flash-image
+- **Google AI Studio**: https://aistudio.google.com/
 
 ## 🔍 Troubleshooting
 
