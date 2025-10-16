@@ -2,9 +2,11 @@
 import UpdateNotificationDialog from '@/components/common/UpdateNotificationDialog'
 import SettingsDialog from '@/components/settings/dialog'
 import { LoginDialog } from '@/components/auth/LoginDialog'
+import { ChallengeDialog } from '@/components/auth/ChallengeDialog'
 import { ThemeProvider } from '@/components/theme/ThemeProvider'
 import { ConfigsProvider } from '@/contexts/configs'
 import { AuthProvider } from '@/contexts/AuthContext'
+import { ChallengeAuthProvider, useChallengeAuth } from '@/contexts/ChallengeAuthContext'
 import { useTheme } from '@/hooks/use-theme'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client'
@@ -64,8 +66,9 @@ const queryClient = new QueryClient({
   },
 })
 
-function App() {
+function AppContent() {
   const { theme } = useTheme()
+  const { isAuthenticated, setAuthenticated } = useChallengeAuth()
 
   // Auto-start ComfyUI on app startup
   useEffect(() => {
@@ -106,26 +109,39 @@ function App() {
       >
         <AuthProvider>
           <ConfigsProvider>
-            <div className="app-container">
-              <RouterProvider router={router} />
+            {/* Challenge Dialog - must be authenticated to see app */}
+            <ChallengeDialog onAuthenticated={() => setAuthenticated(true)} />
+            
+            {isAuthenticated && (
+              <div className="app-container">
+                <RouterProvider router={router} />
 
-              {/* Install ComfyUI Dialog */}
-              {/* <InstallComfyUIDialog /> */}
+                {/* Install ComfyUI Dialog */}
+                {/* <InstallComfyUIDialog /> */}
 
-              {/* Update Notification Dialog */}
-              <UpdateNotificationDialog />
+                {/* Update Notification Dialog */}
+                <UpdateNotificationDialog />
 
-              {/* Settings Dialog */}
-              <SettingsDialog />
+                {/* Settings Dialog */}
+                <SettingsDialog />
 
-              {/* Login Dialog */}
-              <LoginDialog />
-            </div>
+                {/* Login Dialog - Disabled for self-hosted version */}
+                {/* <LoginDialog /> */}
+              </div>
+            )}
           </ConfigsProvider>
         </AuthProvider>
       </PersistQueryClientProvider>
       <Toaster position="bottom-center" richColors />
     </ThemeProvider>
+  )
+}
+
+function App() {
+  return (
+    <ChallengeAuthProvider>
+      <AppContent />
+    </ChallengeAuthProvider>
   )
 }
 

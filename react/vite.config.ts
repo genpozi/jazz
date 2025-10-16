@@ -28,7 +28,9 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
+      host: '0.0.0.0',
       port: 5174,
+      allowedHosts: ['.gitpod.dev'],
       proxy: {},
     },
   }
@@ -89,6 +91,12 @@ export default defineConfig(({ mode }) => {
         changeOrigin: true,
         // Uncomment the following if you want to remove the /api prefix when forwarding to Flask
         // rewrite: (path) => path.replace(/^\/api/, '')
+      },
+      // Proxy Socket.IO connections
+      '/socket.io': {
+        target: `http://127.0.0.1:${PORT}`,
+        changeOrigin: true,
+        ws: true,
       },
       // Also proxy WebSocket connections
       '/ws': {

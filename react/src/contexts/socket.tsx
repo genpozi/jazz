@@ -40,10 +40,9 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
 
         // Create socket manager instance if not exists
         if (!socketManagerRef.current) {
+          // Always use window.location.origin to work with Gitpod and other cloud environments
           socketManagerRef.current = new SocketIOManager({
-            serverUrl: process.env.NODE_ENV === 'development'
-              ? 'http://localhost:57988'
-              : window.location.origin,
+            serverUrl: window.location.origin,
             autoConnect: false
           })
         }
